@@ -10,76 +10,10 @@ import Text from 'components/Text';
 import { css } from '@emotion/react';
 import colors from 'constants/colors';
 import { useInternalRouter } from 'pages/routing';
-import { ComponentProps, useEffect, useState } from 'react';
-import { LocalStorage, LocalStorageKey } from 'utils/Storage';
-import { amountToKrw } from 'utils/Currency';
-import useGetLoanInterest from 'hooks/useGetLoanInterest';
-import useDebounce from 'hooks/useDebounce';
-
-// ? 최소 선택 단위 100으로 임의 설정, 기획 확인 필요
+import { ComponentProps } from 'react';
 
 export const LoanSetupPage = () => {
   const router = useInternalRouter();
-  const [loanAmount, setLoanAmount] = useState(50000000);
-  const [repaymentMonths, setRepaymentMonths] = useState(30);
-
-  const debouncedLoanAmount = useDebounce(loanAmount, 200) as number;
-  const { isLoading, baseAmount, interestRate } = useGetLoanInterest(debouncedLoanAmount);
-
-  const handleAmountChange = (amount: number) => {
-    setLoanAmount(amount);
-    LocalStorage.setValue(
-      LocalStorageKey.LoanInfo,
-      JSON.stringify({
-        amount,
-        month: repaymentMonths,
-      })
-    );
-  };
-
-  const handleRepaymentMonths = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRepaymentMonths(Number(e.target.value));
-    LocalStorage.setValue(
-      LocalStorageKey.LoanInfo,
-      JSON.stringify({
-        amount: loanAmount,
-        month: e.target.value,
-      })
-    );
-  };
-
-  useEffect(() => {
-    const loanInfo = LocalStorage.getValue(LocalStorageKey.LoanInfo);
-    if (!loanInfo) {
-      LocalStorage.setValue(
-        LocalStorageKey.LoanInfo,
-        JSON.stringify({
-          amount: 5000,
-          month: 30,
-        })
-      );
-      return;
-    }
-
-    try {
-      const info = JSON.parse(loanInfo);
-
-      if (!info.amount || !info.month) {
-        LocalStorage.removeItem(LocalStorageKey.LoanInfo);
-        return;
-      }
-
-      if (info.amount) {
-        setLoanAmount(Number(info.amount));
-      }
-      if (info.month) {
-        setRepaymentMonths(Number(info.month));
-      }
-    } catch (error) {
-      // do thing
-    }
-  });
-
   return (
     <>
       <Header onBackClick={() => router.goBack()} />
@@ -91,14 +25,11 @@ export const LoanSetupPage = () => {
             margin-top: 20px;
           `}
         >
-          얼마나 빌릴까요? {amountToKrw(loanAmount)}
+          얼마나 빌릴까요? 5000만원
         </Text>
         <AmountSlider
-          value={loanAmount}
-          onChange={handleAmountChange}
-          step={1000000}
-          minValue={10000000}
-          maxValue={300000000}
+          minValue={2}
+          maxValue={60}
           label={{
             min: '1000만원',
             max: '3억원',
@@ -114,7 +45,7 @@ export const LoanSetupPage = () => {
             margin-top: 5px;
           `}
         >
-          {isLoading ? '...' : `${amountToKrw(Number(baseAmount))}부터는 이자가 ${Number(interestRate / 10)}%에요`}
+          2억원 부터는 이자가 3.5%에요
         </Text>
         <Text
           typography="t4"
@@ -125,8 +56,6 @@ export const LoanSetupPage = () => {
           몇개월에 걸쳐 상환할까요?
         </Text>
         <DurationSelect
-          value={repaymentMonths}
-          onChange={handleRepaymentMonths}
           css={css`
             margin-top: 5px;
           `}
