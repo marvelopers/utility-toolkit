@@ -1,0 +1,41 @@
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@mixin _typography($name, $font-size, $line-height, $skeleton-border-radius) {
+  $font-size-number: strip-unit($font-size);
+
+  .typography-#{$name},
+  .font-size--#{$font-size-number} {
+    font-size: $font-size;
+    font-size: var(--toss-font-size-#{$font-size-number});
+    line-height: $line-height;
+    line-height: var(--toss-line-height-#{$font-size-number});
+  }
+}
+
+@include _typography('t1', 30px, 1.333, 8px);
+@include _typography('t2', 26px, 1.346, 7px);
+@include _typography('t3', 22px, 1.409, 6px);
+@include _typography('t4', 20px, 1.45, 6px);
+@include _typography('t5', 17px, 1.5, 5.5px);
+@include _typography('t6', 15px, 1.5, 5px);
+@include _typography('t7', 13px, 1.5, 5px);
+
+@include _typography('st1', 29px, 1.31, 8px);
+@include _typography('st2', 28px, 1.321, 7px);
+@include _typography('st3', 27px, 1.333, 7px);
+@include _typography('st4', 25px, 1.36, 7px);
+@include _typography('st5', 24px, 1.375, 7px);
+@include _typography('st6', 23px, 1.391, 7px);
+@include _typography('st7', 21px, 1.429, 6px);
+@include _typography('st8', 19px, 1.474, 6px);
+@include _typography('st9', 18px, 1.5, 6px);
+@include _typography('st10', 16px, 1.5, 5px);
+@include _typography('st11', 14px, 1.5, 5px);
+@include _typography('st12', 12px, 1.5, 5px);
+@include _typography('st13', 11px, 1.5, 5px);

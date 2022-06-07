@@ -1,0 +1,74 @@
+@import 'variables';
+@import '../colors';
+
+.slider__slider {
+  position: relative;
+  height: $slider-height;
+}
+
+.slider__input {
+  position: absolute;
+  -webkit-appearance: none; 
+  height: 100%;
+  width: 100%; 
+  background: transparent; 
+  padding: 0;
+  cursor: pointer;
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: #{$slider-knob-radius * 2};
+    width: #{$slider-knob-radius * 2};
+    border-radius: 100%;
+    background-color: $white;
+    box-shadow: 0 0 0 1px $greyOpacity200, 0 8px 8px 0 $greyOpacity300, 0 2px 3px 0 $greyOpacity300;
+    border: none;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  
+}
+
+.slider__track {
+  position: absolute;
+  top: $track-top;
+  right: 0;
+  left: 0;
+  height: $track-height;
+  background-color: $grey200;
+  border-radius: $track-border-radius;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.slider__label-row {
+  display: flex;
+  justify-content: space-between;
+  height: 20px;
+
+  &__label {
+    font-weight: 500;
+    color: $grey600;
+  }
+}
+
+.slider__progress-container {
+  position: absolute;
+  height: 100%;
+  
+  left: $slider-knob-radius;
+  right: $slider-knob-radius;
+  will-change: transform;
+}
+
+.slider__progress-bar {
+  position: absolute;
+  background-color: $blue400;
+  height: 100%;
+  
+  left: calc(-100% - #{$slider-knob-radius});
+  width: calc(100% + #{$slider-knob-radius});
+}

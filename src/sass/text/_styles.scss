@@ -1,0 +1,67 @@
+@import './mixins';
+@import '../colors';
+
+$css-property-display: (
+  inline,
+  block,
+  contents,
+  flex,
+  grid,
+  inline-block,
+  inline-flex,
+  inline-grid,
+  inline-table,
+  list-item,
+  run-in,
+  table,
+  table-caption,
+  table-column-group,
+  table-header-group,
+  table-footer-group,
+  table-row-group,
+  table-cell,
+  table-column,
+  table-row,
+  none,
+  initial,
+  inherit
+);
+
+
+.text {
+  color: $grey900;
+
+  @each $name, $value in $font-weights {
+    &--font-weight-#{$name} {
+      @include font-weight($name);
+    }
+  }
+
+  &--single-line {
+    max-width: 100%;
+    display: inline-block;
+    @include single-line-elliptical-text;
+  }
+
+  &--multi-line {
+    @include multiline-elliptical-text(2);
+  }
+
+  &--word-break {
+    &.text--display-block,
+    &.text--display-inline-block {
+      max-width: 100%;
+    }
+  }
+
+  @each $value in $css-property-display {
+    &--display-#{$value} {
+      display: $value;
+    }
+  }
+
+  &--as {
+    margin: 0;
+    padding: 0;
+  }
+}
