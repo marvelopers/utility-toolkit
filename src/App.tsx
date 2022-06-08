@@ -3,7 +3,8 @@ import colors from 'constants/colors';
 import { css, Global } from '@emotion/react';
 import { GlobalPortal } from './GlobalPortal';
 
-import 'sass/app.scss';
+// import 'sass/app.scss';
+import 'app.scss';
 import { Routes } from './pages/Routes';
 import { ReactNode } from 'react';
 
