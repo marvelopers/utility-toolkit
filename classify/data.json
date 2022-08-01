@@ -1,0 +1,19 @@
+{
+  "stateManagement": [
+    {
+      "value": "tanStackQuery",
+      "keyword": "asynchronous",
+      "concept": "asynchronous state management"
+    },
+    {
+      "value": "redux",
+      "keyword": "predictable",
+      "concept": "predictable State container"
+    },
+    {
+      "value": "recoil",
+      "keyword": "react",
+      "concept": "state management library for React"
+    }
+  ]
+}
