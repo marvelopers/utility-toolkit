@@ -1,0 +1,15 @@
+{
+  "name": "utility-toolkit",
+  "packageManager": "yarn@3.3.0",
+  "workspaces": [
+    "packages/**/**"
+  ],
+  "scripts": {
+    "lint": "eslint ./packages --ext .ts,.tsx,.js,.jsx --cache",
+    "test": "yarn workspace test"
+  },
+  "devDependencies": {
+    "eslint": "^8.34.0",
+    "typescript": "^4.9.5"
+  }
+}
