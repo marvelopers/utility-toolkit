@@ -1,8 +1,8 @@
 module.exports = {
   root: true,
   env: { es6: true, node: true, browser: true, jest: true },
-  extends: [ 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended', 'prettier' ],
-  plugins: [ '@typescript-eslint', 'import', 'react', 'react-hooks', '@emotion' ],
+  extends: [ 'eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react_/recommended', 'plugin:react_-hooks/recommended', 'prettier' ],
+  plugins: [ '@typescript-eslint', 'import', 'react', 'react_-hooks', '@emotion' ],
   settings: { 'import/resolver': { typescript: {} }, react: { version: 'detect' } },
   rules: {
     '@typescript-eslint/no-empty-function': 'off',
