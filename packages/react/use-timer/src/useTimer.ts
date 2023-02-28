@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getDurationTime } from './duration';
 
-const useTimer = (start: number, end?: number) => {
+export const useTimer = (start: number, end?: number) => {
   const [time, setTime] = useState({
     days: '00',
     hour: '00',
@@ -18,5 +18,3 @@ const useTimer = (start: number, end?: number) => {
 
   return time;
 };
-
-export default useTimer;
