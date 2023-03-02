@@ -12,3 +12,6 @@
 
 .editorconfig
 .idea
+
+# testing
+coverage
